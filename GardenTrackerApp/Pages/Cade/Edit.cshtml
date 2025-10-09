@@ -1,0 +1,50 @@
+﻿@page
+@model GardenTrackerApp.Pages.Cade.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Plant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Plant.Id" />
+            <div class="form-group">
+                <label asp-for="Plant.Type" class="control-label"></label>
+                <input asp-for="Plant.Type" class="form-control" />
+                <span asp-validation-for="Plant.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plant.Name" class="control-label"></label>
+                <input asp-for="Plant.Name" class="form-control" />
+                <span asp-validation-for="Plant.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plant.WaterFrequency" class="control-label"></label>
+                <input asp-for="Plant.WaterFrequency" class="form-control" />
+                <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plant.Notes" class="control-label"></label>
+                <input asp-for="Plant.Notes" class="form-control" />
+                <span asp-validation-for="Plant.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
