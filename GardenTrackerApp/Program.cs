@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using GardenTrackerApp.Data;
-namespace GardenTrackerApp
-{
+namespace GardenTrackerApp;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -13,6 +13,7 @@ namespace GardenTrackerApp
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddSingleton<IPlantRepository, JsonPlantRepository>();
 
             var app = builder.Build();
 
@@ -36,4 +37,4 @@ namespace GardenTrackerApp
             app.Run();
         }
     }
-}
+

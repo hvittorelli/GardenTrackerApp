@@ -1,0 +1,23 @@
+[
+  {
+    "ID": 1,
+    "Name": "Basil",
+    "Type": "Herb",
+    "WaterFrequency": 2,
+    "Notes": "Pinch flowers to encourage leaves"
+  },
+  {
+    "ID": 2,
+    "Name": "Spider Plant",
+    "Type": "Houseplant",
+    "WaterFrequency": 7,
+    "Notes": "Prefers humidity"
+  },
+  {
+    "ID": 3,
+    "Name": "Tomato",
+    "Type": "Vegetable",
+    "WaterFrequency": 3,
+    "Notes": "Planted with seeds"
+  }
+]
