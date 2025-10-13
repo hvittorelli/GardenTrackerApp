@@ -1,0 +1,98 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h1 class="display-4 text-center mb-4">Privacy Policy</h1>
+            <p class="text-muted text-center mb-5">Last Updated: October 2025</p>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Introduction</h2>
+                    <p class="card-text">
+                        Welcome to Garden Tracker. We are committed to protecting your privacy and ensuring the security
+                        of your personal information. This Privacy Policy explains how we collect, use, disclose, and
+                        safeguard your information when you use our application.
+                    </p>
+                    <p class="card-text">
+                        Please read this privacy policy carefully. If you do not agree with the terms of this privacy
+                        policy, please do not access the application.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Information We Collect</h2>
+                    <p class="card-text">
+                        This application stores the following information locally in a SQL Server database:
+                    </p>
+                    <ul>
+                        <li>Plant information (type, name, watering frequency, notes)</li>
+                        <li>User-entered data through forms</li>
+                        <li>Basic application usage logs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">How We Use Your Information</h2>
+                    <p class="card-text">
+                        Information entered into Garden Tracker is used solely for:
+                    </p>
+                    <ul>
+                        <li>Demonstrating CRUD (Create, Read, Update, Delete) operations</li>
+                        <li>Displaying plant management functionality</li>
+                        <li>Educational purposes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Data Storage</h2>
+                    <p class="card-text">
+                        All data is stored locally using SQL Server LocalDB. This data remains on the local
+                        machine running the application and is not transmitted to external servers or third parties.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Changes to This Privacy Policy</h2>
+                    <p class="card-text">
+                        We may update our Privacy Policy from time to time. We will notify you of any changes by posting
+                        the new Privacy Policy on this page and updating the "Last Updated" date at the top of this policy.
+                    </p>
+                    <p class="card-text">
+                        You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy
+                        Policy are effective when they are posted on this page.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-5">
+                <div class="card-body">
+                    <h2 class="card-title">Contact Us</h2>
+                    <p class="card-text">
+                        If you have any questions about this Privacy Policy, please contact us:
+                    </p>
+                    <ul>
+                        <li>Through our <a asp-page="/Contact">Contact page</a></li>
+                        <li>By email: privacy@gardentracker.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mb-5">
+                <a asp-page="/Index" class="btn btn-success btn-lg">Return to Home</a>
+            </div>
+        </div>
+    </div>
+</div>

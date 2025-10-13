@@ -1,0 +1,67 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="display-4 text-center mb-4">Contact Us</h1>
+            <p class="lead text-center mb-5">
+                Have questions, suggestions, or feedback about Garden Tracker? We'd love to hear from you!
+            </p>
+
+            @if (Model.MessageSent)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thank you!</strong> Your message has been received. We'll get back to you soon.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">📧 Email Support</h4>
+                            <p class="card-text">For technical support and inquiries:</p>
+                            <p class="mb-0"><strong>support@gardentracker.com</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">🌐 Connect With Us</h4>
+                            <p class="card-text">Follow our development progress:</p>
+                            <p class="mb-0">
+                                <a href="https://github.com/hvittorelli/GardenTrackerApp" target="_blank" class="text-decoration-none">
+                                    <strong>GitHub Repository</strong>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Meet the Team</h4>
+                    <p class="card-text">Garden Tracker is developed by a dedicated team of students:</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><strong>Bailey</strong> - Developer</li>
+                        <li class="mb-2"><strong>Cade</strong> - Developer</li>
+                        <li class="mb-2"><strong>Hope</strong> - Developer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
