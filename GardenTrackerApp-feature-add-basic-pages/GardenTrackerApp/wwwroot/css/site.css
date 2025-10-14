@@ -1,0 +1,244 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Enhanced Garden Tracker Styles */
+/* Add this to your existing wwwroot/css/site.css file */
+
+/* Garden-themed color scheme */
+:root {
+    --garden-green: #4a7c59;
+    --garden-light-green: #7fb069;
+    --garden-dark: #2d5f3a;
+    --garden-cream: #f8f4e1;
+    --garden-brown: #8b7355;
+}
+
+/* Custom styling for navbar brand */
+.navbar-brand {
+    font-weight: 600;
+    color: var(--garden-green) !important;
+    font-size: 1.5rem;
+}
+
+/* Hero section on landing page */
+.display-4 {
+    color: var(--garden-green);
+    font-weight: 700;
+}
+
+.lead {
+    color: var(--garden-dark);
+    font-size: 1.25rem;
+}
+
+.card-title {
+    color: var(--garden-green);
+    font-weight: 600;
+}
+
+/* Button stylings */
+.btn-success {
+    background-color: var(--garden-green);
+    border-color: var(--garden-green);
+    transition: all 0.3s ease;
+}
+
+    .btn-success:hover {
+        background-color: var(--garden-dark);
+        border-color: var(--garden-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+.btn-primary {
+    background-color: var(--garden-light-green);
+    border-color: var(--garden-light-green);
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: var(--garden-green);
+        border-color: var(--garden-green);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+/* Footer styling */
+.footer {
+    background-color: var(--garden-cream);
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+}
+
+    .footer a {
+        color: var(--garden-green);
+        transition: color 0.2s ease;
+    }
+
+        .footer a:hover {
+            color: var(--garden-dark);
+            text-decoration: underline;
+        }
+
+/* Navigation dropdown */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dropdown-item {
+    transition: background-color 0.2s ease;
+}
+
+    .dropdown-item:hover {
+        background-color: var(--garden-cream);
+        color: var(--garden-dark);
+    }
+
+/* Form styling */
+.form-control:focus {
+    border-color: var(--garden-green);
+    box-shadow: 0 0 0 0.2rem rgba(74, 124, 89, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--garden-dark);
+}
+
+/* Alert styling */
+.alert-success {
+    background-color: #d4edda;
+    border-color: var(--garden-light-green);
+    color: var(--garden-dark);
+}
+
+/* Privacy page sections */
+.privacy-section {
+    margin-bottom: 2rem;
+}
+
+/* Contact page specific */
+.contact-info {
+    background-color: var(--garden-cream);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Animation for page load */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Card icon styling */
+.card h3 {
+    margin-bottom: 1rem;
+}
+
+/* Team member buttons */
+.team-member-btn {
+    min-width: 200px;
+    margin: 0.5rem;
+}
+
+/* Table styling for plant lists (if used) */
+.table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .table thead {
+        background-color: var(--garden-green);
+        color: white;
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--garden-cream);
+        transition: background-color 0.2s ease;
+    }
+
+/* Shadow utilities */
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Text color utilities */
+.text-garden-green {
+    color: var(--garden-green) !important;
+}
+
+.text-garden-dark {
+    color: var(--garden-dark) !important;
+}
+
+/* Background utilities */
+.bg-garden-cream {
+    background-color: var(--garden-cream) !important;
+}
+
+/* Custom spacing for sections */
+.section-spacing {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Link styling */
+a {
+    color: var(--garden-green);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    a:hover {
+        color: var(--garden-dark);
+        text-decoration: underline;
+    }

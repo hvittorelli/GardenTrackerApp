@@ -1,0 +1,96 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Garden Tracker</h1>
+    <p class="lead">Your personal companion for managing and tracking your garden plants</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">About Garden Tracker</h2>
+                <p class="card-text">
+                    Garden Tracker is a comprehensive application designed to help you manage your garden with ease.
+                    Track your plants, monitor watering schedules, and keep detailed notes about each plant in your garden.
+                    Whether you're a seasoned gardener or just starting out, our application provides the tools you need
+                    to maintain a thriving garden.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="card-title">🌱 Track Plants</h3>
+                <p class="card-text">Keep a detailed record of all your plants including type, name, and care requirements.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="card-title">💧 Water Schedules</h3>
+                <p class="card-text">Monitor watering frequencies and ensure your plants get the care they need.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="card-title">📝 Detailed Notes</h3>
+                <p class="card-text">Add custom notes and observations about each plant's growth and health.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Team Members</h2>
+                <p class="text-center mb-4">Explore plant management features by team member:</p>
+                <div class="row">
+                    <div class="col-md-4 text-center mb-3">
+                        <a asp-page="/Bailey/Index" class="btn btn-success btn-lg w-75">Bailey's Plants</a>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <a asp-page="/Cade/Index" class="btn btn-success btn-lg w-75">Cade's Plants</a>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <a asp-page="/Hope/Index" class="btn btn-success btn-lg w-75">Hope's Plants</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4 mb-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h4 class="card-title">Need Help?</h4>
+                <p class="card-text">Have questions or feedback about Garden Tracker?</p>
+                <a asp-page="/Contact" class="btn btn-outline-primary">Contact Us</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h4 class="card-title">Your Privacy</h4>
+                <p class="card-text">Learn about how we protect your data and privacy.</p>
+                <a asp-page="/Privacy" class="btn btn-outline-secondary">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</div>
