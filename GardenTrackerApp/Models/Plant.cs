@@ -19,5 +19,9 @@ namespace GardenTrackerApp.Models
 
         [StringLength(500)]
         public string? Notes { get; set; }
+
+        [StringLength(250)]
+        public string? ImagePath { get; set; }
+
     }
 }

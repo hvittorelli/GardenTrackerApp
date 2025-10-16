@@ -1,56 +1,62 @@
 ﻿@page
 @model GardenTrackerApp.Pages.Bailey.IndexModel
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Plants";
 }
 
-
-
-<h1>Index</h1>
+<h1>My Plants</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-primary" asp-page="Create">Add New Plant</a>
 </p>
-<table class="table">
+
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Plant[0].Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Plant[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Plant[0].WaterFrequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Plant[0].Notes)
-            </th>
-            <th></th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Water Frequency</th>
+            <th>Notes</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Plant) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WaterFrequency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var plant in Model.Plant)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(plant.ImagePath))
+                    {
+                        <img src="@plant.ImagePath" alt="@plant.Name" width="50" class="img-thumbnail" />
+                    }
+                </td>
+                <td>@plant.Name</td>
+                <td>@plant.Type</td>
+                <td>@plant.WaterFrequency</td>
+                <td>@plant.Notes</td>
+                <td>
+                    <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#details-@plant.Id" aria-expanded="false" aria-controls="details-@plant.Id">
+                        View
+                    </button>
+                    <a class="btn btn-warning btn-sm" asp-page="/Bailey/Edit" asp-route-id="@plant.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-page="/Bailey/Delete" asp-route-id="@plant.Id">Delete</a>
+                </td>
+            </tr>
+            <tr class="collapse" id="details-@plant.Id">
+                <td colspan="6">
+                    <div class="card p-3">
+                        @if (!string.IsNullOrEmpty(plant.ImagePath))
+                        {
+                            <img src="@plant.ImagePath" class="img-fluid mb-3" alt="@plant.Name" />
+                        }
+                        <p><strong>Name:</strong> @plant.Name</p>
+                        <p><strong>Type:</strong> @plant.Type</p>
+                        <p><strong>Water Frequency:</strong> @plant.WaterFrequency</p>
+                        <p><strong>Notes:</strong> @plant.Notes</p>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

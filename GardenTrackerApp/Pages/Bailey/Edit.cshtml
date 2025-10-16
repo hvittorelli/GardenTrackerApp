@@ -1,50 +1,56 @@
-﻿@page
+﻿@page "{id:int}"
 @model GardenTrackerApp.Pages.Bailey.EditModel
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Plant";
 }
 
-<h1>Edit</h1>
+<h1>Edit Plant</h1>
 
-<h4>Plant</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Plant.Id" />
-            <div class="form-group">
-                <label asp-for="Plant.Type" class="control-label"></label>
-                <input asp-for="Plant.Type" class="form-control" />
-                <span asp-validation-for="Plant.Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Plant.Name" class="control-label"></label>
-                <input asp-for="Plant.Name" class="form-control" />
-                <span asp-validation-for="Plant.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Plant.WaterFrequency" class="control-label"></label>
-                <input asp-for="Plant.WaterFrequency" class="form-control" />
-                <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Plant.Notes" class="control-label"></label>
-                <input asp-for="Plant.Notes" class="form-control" />
-                <span asp-validation-for="Plant.Notes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<form method="post" enctype="multipart/form-data">
+  
+    <input type="hidden" asp-for="Plant.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Current Image</label><br />
+        @if (!string.IsNullOrEmpty(Model.Plant.ImagePath))
+        {
+            <img src="@Model.Plant.ImagePath" alt="@Model.Plant.Name" class="img-thumbnail mb-2" width="150" />
+        }
     </div>
-</div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+    <div class="mb-3">
+        <label class="form-label">Upload New Image (optional)</label>
+        <input type="file" name="PlantImage" class="form-control" accept="image/*" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Plant.Name" class="form-label"></label>
+        <input asp-for="Plant.Name" class="form-control" />
+        <span asp-validation-for="Plant.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Plant.Type" class="form-label"></label>
+        <input asp-for="Plant.Type" class="form-control" />
+        <span asp-validation-for="Plant.Type" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Plant.WaterFrequency" class="form-label"></label>
+        <input asp-for="Plant.WaterFrequency" class="form-control" />
+        <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Plant.Notes" class="form-label"></label>
+        <textarea asp-for="Plant.Notes" class="form-control"></textarea>
+        <span asp-validation-for="Plant.Notes" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a class="btn btn-secondary" asp-page="Index">Cancel</a>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }
