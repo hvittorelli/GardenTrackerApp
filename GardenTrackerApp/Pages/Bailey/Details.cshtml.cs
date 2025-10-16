@@ -10,33 +10,27 @@ using GardenTrackerApp.Models;
 
 namespace GardenTrackerApp.Pages.Bailey
 {
-    public class DetailsModel : PageModel
+    public class ViewModel : PageModel
     {
-        private readonly GardenTrackerApp.Data.GardenTrackerAppContext _context;
+        private readonly GardenTrackerAppContext _context;
 
-        public DetailsModel(GardenTrackerApp.Data.GardenTrackerAppContext context)
+        public ViewModel(GardenTrackerAppContext context)
         {
             _context = context;
         }
 
+        [BindProperty]
         public Plant Plant { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
+            Plant = _context.Plant.FirstOrDefault(p => p.Id == id);
+
+            if (Plant == null)
             {
-                return NotFound();
+                return RedirectToPage("Index");
             }
 
-            var plant = await _context.Plant.FirstOrDefaultAsync(m => m.Id == id);
-            if (plant == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Plant = plant;
-            }
             return Page();
         }
     }

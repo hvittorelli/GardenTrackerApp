@@ -1,6 +1,7 @@
+using GardenTrackerApp.Data;
+using GardenTrackerApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using GardenTrackerApp.Data;
 namespace GardenTrackerApp;
 
     public class Program
@@ -13,12 +14,23 @@ namespace GardenTrackerApp;
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddSingleton<IPlantRepository, JsonPlantRepository>();
+            builder.Services.AddDbContext<GardenTrackerAppContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("GardenTrackerAppContext")));
 
-            var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+        var app = builder.Build();
+
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            var context = services.GetRequiredService<GardenTrackerAppContext>();
+            SeedData.Initialize(context);
+        }
+
+
+        // Configure the HTTP request pipeline.
+        if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
