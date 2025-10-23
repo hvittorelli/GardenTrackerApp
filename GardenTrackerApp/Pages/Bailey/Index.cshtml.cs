@@ -21,9 +21,42 @@ namespace GardenTrackerApp.Pages.Bailey
 
         public IList<Plant> Plant { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        //sort
+        public string NameSort { get; set; } = "name_desc";
+        public string TypeSort { get; set; }
+        public string CurrentSort { get; set; }
+
+        //search
+
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
+
+        public async Task OnGetAsync(string? sortOrder)
         {
-            Plant = await _context.Plant.ToListAsync();
+            CurrentSort = sortOrder;
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
+
+            var plants = from p in _context.Plant
+                         select p;
+
+        //filter
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                plants = plants.Where(p => p.Name.Contains(SearchString) || p.Type.Contains(SearchString));
+            }
+
+        // sort
+            plants = sortOrder switch
+            {
+                "name_desc" => plants.OrderByDescending(p => p.Name),
+                "Type" => plants.OrderBy(p => p.Type),
+                "type_desc" => plants.OrderByDescending(p => p.Type),
+                _ => plants.OrderBy(p => p.Name),
+            };
+
+            Plant = await plants.AsNoTracking().ToListAsync();
         }
+      
     }
 }
