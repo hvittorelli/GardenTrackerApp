@@ -22,14 +22,29 @@
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>Image</th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-SearchString="@Model.SearchString">Name</a>
+                <a style="color:white;"
+                   asp-page="./Index"
+                   asp-route-sortOrder="@Model.NameSort"
+                   asp-route-SearchString="@Model.SearchString">
+                    Name
+                </a>
+
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.TypeSort" asp-route-SearchString="@Model.SearchString">Type</a>
+                <a style="color:white;"
+                   asp-page="./Index" asp-route-sortOrder="@Model.TypeSort" asp-route-SearchString="@Model.SearchString">Type</a>
             </th>
-            <th>Water Frequency</th>
+            <th>
+                <a style="color:white;"
+                   asp-page="./Index"
+                   asp-route-sortOrder="@Model.WaterFrequencySort"
+                   asp-route-SearchString="@Model.SearchString">
+                    Water Frequency
+                </a>
             <th>Notes</th>
+            <th>Actions</th>
            
         </tr>
     </thead>
@@ -47,6 +62,7 @@
                 <td>@plant.Type</td>
                 <td>@plant.WaterFrequency</td>
                 <td>@plant.Notes</td>
+               
                 <td>
                     <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#details-@plant.Id" aria-expanded="false" aria-controls="details-@plant.Id">
                         View
@@ -65,6 +81,7 @@
                         <p><strong>Name:</strong> @plant.Name</p>
                         <p><strong>Type:</strong> @plant.Type</p>
                         <p><strong>Water Frequency:</strong> @plant.WaterFrequency</p>
+
                         <p><strong>Notes:</strong> @plant.Notes</p>
                     </div>
                 </td>

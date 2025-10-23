@@ -24,6 +24,8 @@ namespace GardenTrackerApp.Pages.Bailey
         //sort
         public string NameSort { get; set; } = "name_desc";
         public string TypeSort { get; set; }
+        public string WaterFrequencySort { get; set; }
+
         public string CurrentSort { get; set; }
 
         //search
@@ -36,27 +38,35 @@ namespace GardenTrackerApp.Pages.Bailey
             CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
+            WaterFrequencySort = sortOrder == "WaterFrequency" ? "waterfrequency_desc" : "WaterFrequency";
+
 
             var plants = from p in _context.Plant
                          select p;
 
-        //filter
+            //filter
             if (!string.IsNullOrEmpty(SearchString))
             {
-                plants = plants.Where(p => p.Name.Contains(SearchString) || p.Type.Contains(SearchString));
+                plants = plants.Where(p =>
+                    p.Name.Contains(SearchString) ||
+                    p.Type.Contains(SearchString) ||
+                    p.WaterFrequency.Contains(SearchString)
+                );
             }
 
-        // sort
+
+            // sort
             plants = sortOrder switch
             {
                 "name_desc" => plants.OrderByDescending(p => p.Name),
                 "Type" => plants.OrderBy(p => p.Type),
                 "type_desc" => plants.OrderByDescending(p => p.Type),
+                "WaterFrequency" => plants.OrderBy(p => p.WaterFrequency),
+                "waterfrequency_desc" => plants.OrderByDescending(p => p.WaterFrequency),
                 _ => plants.OrderBy(p => p.Name),
             };
 
             Plant = await plants.AsNoTracking().ToListAsync();
         }
-      
     }
 }
