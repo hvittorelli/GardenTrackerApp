@@ -10,15 +10,27 @@
     <a class="btn btn-primary" asp-page="Create">Add New Plant</a>
 </p>
 
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search by name or type"
+               name="SearchString" value="@Model.SearchString" />
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+</form>
+
+
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Type</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-SearchString="@Model.SearchString">Name</a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TypeSort" asp-route-SearchString="@Model.SearchString">Type</a>
+            </th>
             <th>Water Frequency</th>
             <th>Notes</th>
-            <th>Actions</th>
+           
         </tr>
     </thead>
     <tbody>
