@@ -22,14 +22,32 @@
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>Image</th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-SearchString="@Model.SearchString">Name</a>
+                <a style="color:white;"
+                   asp-page="./Index"
+                   asp-route-sortOrder="@Model.NameSort"
+                   asp-route-SearchString="@Model.SearchString">
+                    Name
+                </a>
+
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.TypeSort" asp-route-SearchString="@Model.SearchString">Type</a>
+                <a style="color:white;"
+                   asp-page="./Index" asp-route-sortOrder="@Model.TypeSort" asp-route-SearchString="@Model.SearchString">Type</a>
             </th>
-            <th>Water Frequency</th>
+            <th>
+                <a style="color:white;"
+                   asp-page="./Index"
+                   asp-route-sortOrder="@Model.WaterFrequencySort"
+                   asp-route-SearchString="@Model.SearchString">
+                    Water Frequency
+                </a>
+            </th>
+
+            </th>
             <th>Notes</th>
+            <th>Actions</th>
            
         </tr>
     </thead>
