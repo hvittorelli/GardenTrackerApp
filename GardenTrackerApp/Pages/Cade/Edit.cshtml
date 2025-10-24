@@ -1,50 +1,266 @@
 ﻿@page
 @model GardenTrackerApp.Pages.Cade.EditModel
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Plant";
 }
 
-<h1>Edit</h1>
+<style>
+    .edit-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-<h4>Plant</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 30px;
+        background-color: #fff;
+    }
+
+    .form-header {
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--garden-light-green);
+    }
+
+        .form-header h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-header p {
+            color: #666;
+            margin: 0;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: border-color 0.2s;
+    }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--garden-light-green);
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0);
+        }
+
+        .form-control.notes-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+    .current-image-section {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
+        .current-image-section h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+    .current-image {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .no-image-text {
+        color: #999;
+        font-style: italic;
+    }
+
+    .remove-image-checkbox {
+        margin-top: 10px;
+    }
+
+        .remove-image-checkbox label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .remove-image-checkbox input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+    .file-upload-container {
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        background-color: #f9f9f9;
+        transition: all 0.2s;
+    }
+
+        .file-upload-container:hover {
+            border-color: #2196F3;
+            background-color: #f0f7ff;
+        }
+
+        .file-upload-container input[type="file"] {
+            display: none;
+        }
+
+    .file-upload-label {
+        cursor: pointer;
+        color: #2196F3;
+        font-weight: 600;
+    }
+
+        .file-upload-label:hover {
+            color: #1976D2;
+        }
+
+    .file-name {
+        margin-top: 10px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .image-preview {
+        margin-top: 15px;
+        max-width: 300px;
+        max-height: 300px;
+        border-radius: 8px;
+        display: none;
+    }
+
+    
+</style>
+
+<div class="edit-container">
+    <div class="card">
+        <div class="form-header">
+            <h1>Edit Plant</h1>
+            <p>Update your plant's information</p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
             <input type="hidden" asp-for="Plant.Id" />
+
             <div class="form-group">
-                <label asp-for="Plant.Type" class="control-label"></label>
-                <input asp-for="Plant.Type" class="form-control" />
-                <span asp-validation-for="Plant.Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Plant.Name" class="control-label"></label>
+                <label asp-for="Plant.Name">Plant Name</label>
                 <input asp-for="Plant.Name" class="form-control" />
                 <span asp-validation-for="Plant.Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Plant.WaterFrequency" class="control-label"></label>
+                <label asp-for="Plant.Type">Type</label>
+                <input asp-for="Plant.Type" class="form-control" />
+                <span asp-validation-for="Plant.Type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Plant.WaterFrequency">Water Frequency</label>
                 <input asp-for="Plant.WaterFrequency" class="form-control" />
                 <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Plant.Notes" class="control-label"></label>
-                <input asp-for="Plant.Notes" class="form-control" />
+                <label asp-for="Plant.Notes">Notes</label>
+                <textarea asp-for="Plant.Notes" class="form-control notes-input"></textarea>
                 <span asp-validation-for="Plant.Notes" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label>Plant Image</label>
+
+                @if (!string.IsNullOrEmpty(Model.Plant.ImagePath))
+                {
+                    <div class="current-image-section">
+                        <h4>Current Image:</h4>
+                        <img src="@Model.Plant.ImagePath" alt="@Model.Plant.Name" class="current-image" />
+                        <div class="remove-image-checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="RemoveImage" />
+                                Remove current image
+                            </label>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="current-image-section">
+                        <p class="no-image-text">No image currently set</p>
+                    </div>
+                }
+
+                <div class="file-upload-container" id="fileUploadContainer">
+                    <input type="file" id="imageUpload" name="ImageUpload" accept="image/*" />
+                    <label for="imageUpload" class="file-upload-label">
+                        <div>📷 Click to upload a new image</div>
+                        <div style="font-size: 12px; color: #999; margin-top: 5px;">Supported formats: JPG, PNG, GIF</div>
+                    </label>
+                    <div class="file-name" id="fileName"></div>
+                    <img id="imagePreview" class="image-preview" alt="Preview" />
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-page="Index" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+<script>
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const fileName = document.getElementById('fileName');
+        const preview = document.getElementById('imagePreview');
+        const removeCheckbox = document.querySelector('input[name="RemoveImage"]');
+
+        if (file) {
+            fileName.textContent = 'Selected: ' + file.name;
+
+            // Uncheck remove image if new image is selected
+            if (removeCheckbox) {
+                removeCheckbox.checked = false;
+            }
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            fileName.textContent = '';
+            preview.style.display = 'none';
+        }
+    });
+</script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
