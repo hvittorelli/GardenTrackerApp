@@ -2,48 +2,53 @@
 @model GardenTrackerApp.Pages.Hope.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add a New Plant";
 }
 
-<h1>Create</h1>
+<h1 class="text-center mt-4">🌿 Add a New Plant</h1>
 
-<h4>Plant</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Plant.Type" class="control-label"></label>
-                <input asp-for="Plant.Type" class="form-control" />
-                <span asp-validation-for="Plant.Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Plant.Name" class="control-label"></label>
-                <input asp-for="Plant.Name" class="form-control" />
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-sm p-4 w-100" style="max-width: 800px;">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Plant.Name" class="form-label fw-bold">Plant Name</label>
+                <input asp-for="Plant.Name" class="form-control" placeholder="e.g. Monstera, Lavender, Basil..." />
                 <span asp-validation-for="Plant.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Plant.WaterFrequency" class="control-label"></label>
-                <input asp-for="Plant.WaterFrequency" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Plant.Type" class="form-label fw-bold">Type</label>
+                <input asp-for="Plant.Type" class="form-control" placeholder="e.g. Houseplant, Herb, Succulent..." />
+                <span asp-validation-for="Plant.Type" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Plant.WaterFrequency" class="form-label fw-bold">Water Frequency</label>
+                <input asp-for="Plant.WaterFrequency" class="form-control" placeholder="e.g. Every 3 days" />
                 <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Plant.Notes" class="control-label"></label>
-                <input asp-for="Plant.Notes" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Plant.Notes" class="form-label fw-bold">Notes</label>
+                <textarea asp-for="Plant.Notes" class="form-control" rows="3" placeholder="Add any special care tips or reminders here..."></textarea>
                 <span asp-validation-for="Plant.Notes" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="mb-3">
+                <label asp-for="PlantImage" class="form-label fw-bold">Upload Image (optional)</label>
+                <input asp-for="PlantImage" type="file" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <button type="submit" class="btn btn-success px-4">Add Plant</button>
+                <a asp-page="Index" class="btn btn-outline-secondary px-4">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

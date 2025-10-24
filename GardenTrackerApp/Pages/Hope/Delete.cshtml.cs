@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +12,13 @@ namespace GardenTrackerApp.Pages.Hope
 {
     public class DeleteModel : PageModel
     {
-        private readonly GardenTrackerApp.Data.GardenTrackerAppContext _context;
+        private readonly GardenTrackerAppContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public DeleteModel(GardenTrackerApp.Data.GardenTrackerAppContext context)
+        public DeleteModel(GardenTrackerAppContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         [BindProperty]
@@ -30,15 +32,12 @@ namespace GardenTrackerApp.Pages.Hope
             }
 
             var plant = await _context.Plant.FirstOrDefaultAsync(m => m.Id == id);
-
             if (plant == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Plant = plant;
-            }
+
+            Plant = plant;
             return Page();
         }
 
@@ -53,6 +52,16 @@ namespace GardenTrackerApp.Pages.Hope
             if (plant != null)
             {
                 Plant = plant;
+
+                if (!string.IsNullOrEmpty(Plant.ImagePath))
+                {
+                    var imagePath = Path.Combine(_environment.WebRootPath, Plant.ImagePath.TrimStart('/'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
+
                 _context.Plant.Remove(Plant);
                 await _context.SaveChangesAsync();
             }

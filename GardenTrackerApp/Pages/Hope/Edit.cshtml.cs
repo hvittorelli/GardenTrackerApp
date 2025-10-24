@@ -1,77 +1,81 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GardenTrackerApp.Data;
 using GardenTrackerApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GardenTrackerApp.Pages.Hope
 {
     public class EditModel : PageModel
     {
-        private readonly GardenTrackerApp.Data.GardenTrackerAppContext _context;
+        private readonly GardenTrackerAppContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public EditModel(GardenTrackerApp.Data.GardenTrackerAppContext context)
+        public EditModel(GardenTrackerAppContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         [BindProperty]
         public Plant Plant { get; set; } = default!;
 
+        [BindProperty]
+        public IFormFile? PlantImage { get; set; }  // <-- Add this
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var plant =  await _context.Plant.FirstOrDefaultAsync(m => m.Id == id);
+            var plant = await _context.Plant.FirstOrDefaultAsync(p => p.Id == id);
+
             if (plant == null)
-            {
                 return NotFound();
-            }
+
             Plant = plant;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            _context.Attach(Plant).State = EntityState.Modified;
+            var plantToUpdate = await _context.Plant.FindAsync(Plant.Id);
+            if (plantToUpdate == null)
+                return NotFound();
 
-            try
+            // Update properties
+            plantToUpdate.Name = Plant.Name;
+            plantToUpdate.Type = Plant.Type;
+            plantToUpdate.WaterFrequency = Plant.WaterFrequency;
+            plantToUpdate.Notes = Plant.Notes;
+
+            // Handle image upload if there is a new file
+            if (PlantImage != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PlantExists(Plant.Id))
+                string folderPath = Path.Combine(_environment.WebRootPath, "images");
+                Directory.CreateDirectory(folderPath);
+
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(PlantImage.FileName)}";
+                string fullPath = Path.Combine(folderPath, fileName);
+
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
-                    return NotFound();
+                    await PlantImage.CopyToAsync(fileStream);
                 }
-                else
-                {
-                    throw;
-                }
+
+                plantToUpdate.ImagePath = $"/images/{fileName}";
             }
 
+            await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
-        }
-
-        private bool PlantExists(int id)
-        {
-            return _context.Plant.Any(e => e.Id == id);
         }
     }
 }
