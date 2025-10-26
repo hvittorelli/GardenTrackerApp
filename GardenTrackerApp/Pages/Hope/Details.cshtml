@@ -5,15 +5,17 @@
     ViewData["Title"] = "Plant Details";
 }
 
-<h1 class="text-center mt-4">🌿 Plant Details</h1>
+<h1 class="text-center mt-4" style="color: #4CAF50;">🌿 Plant Details</h1>
 
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+<div class="d-flex justify-content-center align-items-start"
+     style="min-height: 80vh; overflow-y: auto; padding-top: 40px; padding-bottom: 80px;">
     <div class="card shadow-sm p-4 w-100" style="max-width: 600px;">
 
         @if (!string.IsNullOrEmpty(Model.Plant.ImagePath))
         {
             <div class="text-center mb-3">
-                <img src="@Model.Plant.ImagePath" alt="@Model.Plant.Name" class="img-fluid rounded" style="max-height: 200px;" />
+                <img src="@Model.Plant.ImagePath" alt="@Model.Plant.Name"
+                     class="img-fluid rounded" style="max-height: 200px;" />
             </div>
         }
 
