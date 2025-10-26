@@ -5,62 +5,87 @@
     ViewData["Title"] = "Edit Plant";
 }
 
-<h1 class="text-center mt-4">🌿 Edit Plant</h1>
+<style>
+    html, body {
+        height: 100%;
+        overflow-y: auto;
+    }
 
-<div class="d-flex justify-content-center align-items-start" style="min-height: 80vh; overflow-y: auto; padding-top: 20px; padding-bottom: 20px;">
-    <div class="card shadow-sm p-4 w-100" style="max-width: 800px;">
-        <form method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-            <input type="hidden" asp-for="Plant.Id" />
+    main {
+        overflow-y: auto;
+        padding-bottom: 140px;
+    }
 
-            <div class="mb-3">
-                <label asp-for="Plant.Name" class="form-label fw-bold">Plant Name</label>
-                <input asp-for="Plant.Name" class="form-control" placeholder="e.g. Monstera, Lavender, Basil..." />
-                <span asp-validation-for="Plant.Name" class="text-danger"></span>
-            </div>
+    .edit-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 80vh;
+    }
 
-            <div class="mb-3">
-                <label asp-for="Plant.Type" class="form-label fw-bold">Type</label>
-                <input asp-for="Plant.Type" class="form-control" placeholder="e.g. Houseplant, Herb, Succulent..." />
-                <span asp-validation-for="Plant.Type" class="text-danger"></span>
-            </div>
+    .card {
+        max-width: 800px;
+    }
+</style>
 
-            <div class="mb-3">
-                <label asp-for="Plant.WaterFrequency" class="form-label fw-bold">Water Frequency</label>
-                <input asp-for="Plant.WaterFrequency" class="form-control" placeholder="e.g. Every 3 days" />
-                <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
-            </div>
+<main>
+    <h1 class="text-center mt-4" style="color: #4CAF50;">🌿 Edit Plant</h1>
 
-            <div class="mb-3">
-                <label asp-for="Plant.Notes" class="form-label fw-bold">Notes</label>
-                <textarea asp-for="Plant.Notes" class="form-control" rows="3" placeholder="Add any special care tips or reminders here..."></textarea>
-                <span asp-validation-for="Plant.Notes" class="text-danger"></span>
-            </div>
+    <div class="edit-container mt-3">
+        <div class="card shadow-sm p-4 w-100">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Plant.Id" />
 
-            <div class="mb-3">
-                <label class="form-label fw-bold">Current Image</label>
-                @if (!string.IsNullOrEmpty(Model.Plant.ImagePath))
-                {
-                    <div class="mb-2 text-center">
-                        <img src="@Model.Plant.ImagePath" alt="@Model.Plant.Name" class="img-fluid rounded" style="max-height: 150px;" />
-                    </div>
-                }
-                else
-                {
-                    <p class="text-muted text-center">No image uploaded yet.</p>
-                }
+                <div class="mb-3">
+                    <label asp-for="Plant.Name" class="form-label fw-bold">Plant Name</label>
+                    <input asp-for="Plant.Name" class="form-control" placeholder="e.g. Monstera, Lavender, Basil..." />
+                    <span asp-validation-for="Plant.Name" class="text-danger"></span>
+                </div>
 
-                <label asp-for="PlantImage" class="form-label fw-bold">Replace Image (optional)</label>
-                <input asp-for="PlantImage" type="file" class="form-control" accept="image/*" />
-            </div>
+                <div class="mb-3">
+                    <label asp-for="Plant.Type" class="form-label fw-bold">Type</label>
+                    <input asp-for="Plant.Type" class="form-control" placeholder="e.g. Houseplant, Herb, Succulent..." />
+                    <span asp-validation-for="Plant.Type" class="text-danger"></span>
+                </div>
 
-            <div class="d-flex justify-content-center gap-2 mt-3">
-                <button type="submit" class="btn btn-success px-4">Save Changes</button>
-                <a asp-page="./Index" class="btn btn-outline-secondary px-4">Cancel</a>
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="Plant.WaterFrequency" class="form-label fw-bold">Water Frequency</label>
+                    <input asp-for="Plant.WaterFrequency" class="form-control" placeholder="e.g. Every 3 days" />
+                    <span asp-validation-for="Plant.WaterFrequency" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Plant.Notes" class="form-label fw-bold">Notes</label>
+                    <textarea asp-for="Plant.Notes" class="form-control" rows="3" placeholder="Add any special care tips or reminders here..."></textarea>
+                    <span asp-validation-for="Plant.Notes" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Current Image</label>
+                    @if (!string.IsNullOrEmpty(Model.Plant.ImagePath))
+                    {
+                        <div class="mb-2 text-center">
+                            <img src="@Model.Plant.ImagePath" alt="@Model.Plant.Name" class="img-fluid rounded" style="max-height: 150px;" />
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">No image uploaded yet.</p>
+                    }
+
+                    <label asp-for="PlantImage" class="form-label fw-bold">Replace Image (optional)</label>
+                    <input asp-for="PlantImage" type="file" class="form-control" accept="image/*" />
+                </div>
+
+                <div class="d-flex justify-content-center gap-2 mt-3">
+                    <button type="submit" class="btn btn-success px-4">Save Changes</button>
+                    <a asp-page="./Index" class="btn btn-outline-secondary px-4">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</main>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
